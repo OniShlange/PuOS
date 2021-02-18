@@ -10,34 +10,47 @@ class system:
 		print("Вы вошли в режим сна, чтобы выйти, пропишите exit")
 		time.sleep(5)
 		while True:
-			for i in range(1,50):
-				print()
+			print(" " * 8800)
 			print(f"Сейчас дата и время: {datetime.datetime.now()}")
 			x = input()
 			if x == "exit":
 				break
 class math:
 	def plus():
-		x = input("Введите первое число: ")
-		y = input("Введите второе число: ")
-		print(f"Результат: {int(x) + int(y)}")
+		try:
+			x = input("Введите первое число: ")
+			y = input("Введите второе число: ")
+			print(f"Результат: {int(x) + int(y)}")
+		except ValueError:
+			print("Введено неверное число!")
 	def minus():
-		x = input("Введите первое число: ")
-		y = input("Введите второе число: ")
-		print(f"Результат: {int(x) - int(y)}")
+		try:
+			x = input("Введите первое число: ")
+			y = input("Введите второе число: ")
+			print(f"Результат: {int(x) - int(y)}")
+		except ValueError:
+			print("Введено неверное число!")
 	def delenie():
-		x = input("Введите первое число: ")
-		y = input("Введите второе число: ")
-		print(f"Результат: {int(x) / int(y)}")
+		try:
+			x = input("Введите первое число: ")
+			y = input("Введите второе число: ")
+			print(f"Результат: {int(x) / int(y)}")
+		except ValueError:
+			print("Введено неверное число!")
 	def umnozhenie():
-		x = input("Введите первое число: ")
-		y = input("Введите второе число: ")
-		print(f"Результат: {int(x) * int(y)}")
+		try:
+			x = input("Введите первое число: ")
+			y = input("Введите второе число: ")
+			print(f"Результат: {int(x) * int(y)}")
+		except ValueError:
+			print("Введено неверное число!")
 	def stepen():
-		x = input("Введите первое число: ")
-		y = input("Введите второе число: ")
-		if x == 
-		print(f"Результат: {int(x) ** int(y)}")
+		try:
+			x = input("Введите первое число: ")
+			y = input("Введите второе число: ")
+			print(f"Результат: {int(x) ** int(y)}")
+		except ValueError:
+			print("Введено неверное число!")
 class game:
 	def clicker():
 		print("Это кликер! Чтобы кликать, вам нужно нажимать Enter. Чтобы выйти из игры, напишите exit и нажмите Enter. Пожалуйста, кликайте честно, а не зажимайте!")
