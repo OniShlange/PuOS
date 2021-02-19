@@ -64,7 +64,7 @@ class game:
 			else:
 				print(f"Вы накликали: {y}")
 # нет функций
-version = "v0.0.2b"
+version = "v0.0.2с"
 debug = False
 
 print(f"""
