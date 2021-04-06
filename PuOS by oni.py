@@ -6,6 +6,7 @@ import datetime
 import subprocess
 import random
 import os
+import requests
 from sys import platform
 # проверка системы
 if platform == "win32":
@@ -82,7 +83,7 @@ class game:
             else:
                 print(f"Вы накликали: {y}")
 # нет функций
-version = "v0.0.3"
+version = "v0.0.4"
 debug = False
 
 print(f""" _____           _____    _____
@@ -91,7 +92,7 @@ print(f""" _____           _____    _____
 |_____|  |   |  |     |  |_____
 |        |   |  |     |        |
 |        |___|  |_____|  ______| 
-{version} by oni.py
+{version} by oni
 
 Для помощи по поводу команд, пишите "help"
 Запущено по пути {os.path.abspath(os.path.dirname(__file__))}
@@ -100,6 +101,7 @@ print(f""" _____           _____    _____
 
 while True:
     q = input(f"{username}*PuOS{version} >>>")
+    ql = q.split(" ")
     if q == "exit":
         print("Отключение...")
         time.sleep(1)
@@ -121,44 +123,85 @@ while True:
             print("доступ запрещён")
     elif q == "sleep":
         system.sleep()
-    elif q == "math":
-        print("Нет необходимых аргументов. Проверьте 'help'")
-    elif q == "math +":
-        math.plus()
-    elif q == "math -":
-        math.minus()
-    elif q == "math /":
-        math.delenie()
-    elif q == "math *":
-        math.umnozhenie()
-    elif q == "math **":
-        math.stepen()
-    elif q == "math random":
-        math.random()
-    elif q == "game":
-        print("Нет необходимых аргументов. Проверьте 'help'")
-    elif q == "game clicker":
-        print(f"Всего было накликано {game.clicker() - 1}!")
-    elif q == "console":
-        print("Нет необходимых аргументов. Проверьте 'help'")
-    elif q == "console python":
-        print("Для выхода нажмите Ctrl+Z или напишите exit()")
-        print()
-        subprocess.call("python", shell=True)
+    elif ql[0] == "math":
+        try:
+            if ql[1] == "+":
+                math.plus()
+            elif ql[1] == "-":
+                math.minus()
+            elif ql[1] == "/":
+                math.delenie()
+            elif ql[1] == "*":
+                math.umnozhenie()
+            elif ql[1] == "**":
+                math.stepen()
+            elif ql[1] == "random":
+                math.random()
+            else:
+                print("Аргумент неверный. Проверьте команду в 'help'")
+        except IndexError:
+            print("Аргумент отсутствует.")
+    elif ql[0] == "game":
+        try:
+            if ql[1] == "clicker":
+                game.clicker()
+            else:
+                print("Аргумент неверный. Проверьте команду в 'help'")
+        except IndexError:
+            print("Аргумент отсутствует.")
+    elif ql[0] == "console":
+        try:
+            if ql[1] == "python":
+                print("Для выхода нажмите Ctrl+Z или напишите exit()")
+                print()
+                time.sleep(3)
+                subprocess.call("python", shell=True)
+            elif ql[1] == "shell":
+                print("Сейчас откроется новое окно. Для выхода просто закройте окно.")
+                print()
+                time.sleep(3)
+                subprocess.call("start", shell=True)
+            else:
+                print("Аргумент неверный. Проверьте команду в 'help'")
+        except IndexError:
+            print("Аргумент отсутствует.")
+    elif ql[0] == "net":
+        try:
+            if ql[1] == "download":
+                try:
+                    s = input("Введите сайт: ")
+                    f = open("puos_download", "wb")
+                    ufr = requests.get(s)
+                    f.write(ufr.content)
+                    f.close()
+                    print("Попробуйте открыть puos_download через нужный редактор для просмотра содержимого.")
+                except Exception:
+                    print("Произошла ошибка при скачивании!")
+            elif ql[1] == "sitecode":
+                try:
+                    s = input("Введите сайт: ")
+                    r = requests.post(s)
+                    print(r.text)
+                except Exception:
+                    print("Произошла ошибка при отображении!")
+            else:
+                print("Аргумент неверный. Проверьте команду в 'help'")
+        except IndexError:
+            print("Аргумент отсутствует")
     elif q == "date":
         print(datetime.datetime.now())
     elif q == "info":
         print(f"Имя: {username}, система: PuOS, версия системы: {version}")
     elif q == "help":
         print("""
-        console [python] - консоль
+        console [python|shell] - консоль
         date = время и дата
         exit = отключение системы
         game [clicker] = игры
         info = информация о сессии
         math [+|-|/|*|**|random] = математика
+        net [download|sitecode] - интернет
         sleep = сон
         """)
     else:
         print(f"Команды {q} не существует. Используйте команду 'help', чтобы получить доступные команды.")
-        
