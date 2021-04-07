@@ -26,47 +26,35 @@ class system:
             if x == "exit":
                 break
 class math:
-    def plus():
+    def plus(x, y):
         try:
-            x = input("Введите первое число: ")
-            y = input("Введите второе число: ")
             print(f"Результат: {int(x) + int(y)}")
         except ValueError:
             print("Введено неверное число!")
-    def minus():
+    def minus(x, y):
         try:
-            x = input("Введите первое число: ")
-            y = input("Введите второе число: ")
             print(f"Результат: {int(x) - int(y)}")
         except ValueError:
             print("Введено неверное число!")
-    def delenie():
+    def delenie(x, y):
         try:
-            x = input("Введите первое число: ")
-            y = input("Введите второе число: ")
             print(f"Результат: {int(x) / int(y)}")
         except ValueError:
             print("Введено неверное число!")
         except ZeroDivisionError:
             print("Результат: 0")
-    def umnozhenie():
+    def umnozhenie(x, y):
         try:
-            x = input("Введите первое число: ")
-            y = input("Введите второе число: ")
             print(f"Результат: {int(x) * int(y)}")
         except ValueError:
             print("Введено неверное число!")
-    def stepen():
+    def stepen(x, y):
         try:
-            x = input("Введите первое число: ")
-            y = input("Введите второе число: ")
             print(f"Результат: {int(x) ** int(y)}")
         except ValueError:
             print("Введено неверное число!")
-    def random():
+    def random(x, y):
         try:
-            x = input("Введите первое число: ")
-            y = input("Введите второе число: ")
             print(f"Результат: {random.randint(int(x), int(y))}")
         except ValueError:
             print("Введено неверное число!")
@@ -83,7 +71,7 @@ class game:
             else:
                 print(f"Вы накликали: {y}")
 # нет функций
-version = "v0.0.4"
+version = "v0.0.4a"
 debug = False
 
 print(f""" _____           _____    _____
@@ -126,17 +114,17 @@ while True:
     elif ql[0] == "math":
         try:
             if ql[1] == "+":
-                math.plus()
+                math.plus(ql[2], ql[3])
             elif ql[1] == "-":
-                math.minus()
+                math.minus(ql[2], ql[3])
             elif ql[1] == "/":
-                math.delenie()
+                math.delenie(ql[2], ql[3])
             elif ql[1] == "*":
-                math.umnozhenie()
+                math.umnozhenie(ql[2], ql[3])
             elif ql[1] == "**":
-                math.stepen()
+                math.stepen(ql[2], ql[3])
             elif ql[1] == "random":
-                math.random()
+                math.random(ql[2], ql[3])
             else:
                 print("Аргумент неверный. Проверьте команду в 'help'")
         except IndexError:
@@ -169,9 +157,8 @@ while True:
         try:
             if ql[1] == "download":
                 try:
-                    s = input("Введите сайт: ")
                     f = open("puos_download", "wb")
-                    ufr = requests.get(s)
+                    ufr = requests.get(ql[2])
                     f.write(ufr.content)
                     f.close()
                     print("Попробуйте открыть puos_download через нужный редактор для просмотра содержимого.")
@@ -179,8 +166,7 @@ while True:
                     print("Произошла ошибка при скачивании!")
             elif ql[1] == "sitecode":
                 try:
-                    s = input("Введите сайт: ")
-                    r = requests.post(s)
+                    r = requests.post(ql[2])
                     print(r.text)
                 except Exception:
                     print("Произошла ошибка при отображении!")
@@ -199,8 +185,8 @@ while True:
         exit = отключение системы
         game [clicker] = игры
         info = информация о сессии
-        math [+|-|/|*|**|random] = математика
-        net [download|sitecode] - интернет
+        math [+|-|/|*|**|random] [number1] [number2] = математика
+        net [download|sitecode] [site] - интернет
         sleep = сон
         """)
     else:
